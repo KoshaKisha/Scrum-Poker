@@ -38,22 +38,28 @@ export default function RoomPage() {
   }, [authLoading, user, id])
 
   const loadRoom = async () => {
-    try {
-      const roomData = await getRoom(id as string)
-      setRoom(roomData)
-      setParticipants(roomData.participants)
-      setVotes(roomData.votes)
-      setIsRevealed(roomData.isRevealed)
-    } catch (error) {
-      toast({
-        title: "Error loading room",
-        description: "There was a problem loading the room data.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoading(false)
-    }
+  try {
+    const roomData = await getRoom(id as string)
+
+    const safeParticipants = roomData.participants.map((p: any, index: number) => ({
+      ...p,
+      name: typeof p.name === "string" && p.name.trim() !== "" ? p.name : `Guest ${index + 1}`,
+    }))
+
+    setRoom(roomData)
+    setParticipants(safeParticipants)
+    setVotes(roomData.votes)
+    setIsRevealed(roomData.isRevealed)
+  } catch (error) {
+    toast({
+      title: "Error loading room",
+      description: "There was a problem loading the room data.",
+      variant: "destructive",
+    })
+  } finally {
+    setIsLoading(false)
   }
+}
 
   const joinRoomSession = async () => {
     try {

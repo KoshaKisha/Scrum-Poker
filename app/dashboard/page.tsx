@@ -27,7 +27,7 @@ export default function DashboardPage() {
       loadRooms()
     }
   }, [authLoading, user])
-console.log("🍪 Все cookies:", document.cookie)
+// console.log("🍪 Все cookies:", document.cookie)
   const loadRooms = async () => {
     try {
       const userRooms = await getUserRooms()
