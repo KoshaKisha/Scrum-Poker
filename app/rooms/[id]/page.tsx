@@ -13,9 +13,8 @@ import { VotingCards } from "@/components/voting-cards"
 import { ParticipantsList } from "@/components/participants-list"
 import { VotingResults } from "@/components/voting-results"
 import { useAuth } from "@/hooks/use-auth"
-import { Eye, RefreshCw, Users } from "lucide-react"
+import { Eye, RefreshCw, Users, ArrowLeft } from "lucide-react"
 import type { Room, Participant, Vote, User } from "@/lib/generated/prisma"
-
 export default function RoomPage() {
   const { id } = useParams()
   const { user, isLoading: authLoading } = useAuth()
@@ -46,13 +45,19 @@ export default function RoomPage() {
     const roomData = await getRoom(id as string)
 
     const safeParticipants = roomData.participants.map((p: any, index: number) => ({
-      ...p,
-      name: typeof p.name === "string" && p.name.trim() !== "" ? p.name : `Guest ${index + 1}`,
-    }))
+    ...p,
+    name:
+      typeof p.user?.name === "string" && p.user.name.trim() !== ""
+        ? p.user.name
+        : `Guest ${index + 1}`,
+  }))
 
+  const voteMap = Object.fromEntries(
+    roomData.votes.map((vote: any) => [vote.userId, vote.value])
+  )
     setRoom(roomData)
     setParticipants(safeParticipants)
-    setVotes(roomData.votes)
+    setVotes(voteMap)
     setIsRevealed(roomData.isRevealed)
   } catch (error) {
     toast({
@@ -160,6 +165,12 @@ export default function RoomPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Button variant="ghost" size="sm" onClick={() => window.history.back()} className="flex items-center gap-1">
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </Button>
+          </div>
           <h1 className="text-3xl font-bold">{room.name}</h1>
           {room.description && <p className="text-muted-foreground">{room.description}</p>}
         </div>

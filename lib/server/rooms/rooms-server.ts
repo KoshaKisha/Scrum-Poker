@@ -6,7 +6,9 @@ export async function getUserRoomsServer() {
 
   const rooms = await prisma.room.findMany({
     where: { createdById: user.id },
-    include: { participants: true },
+    include: {
+      participants: true,
+    },
   })
 
   return rooms

@@ -3,8 +3,11 @@ import { prisma } from "@/lib/prisma"
 import { getUserOrThrow } from "@/lib/server/auth/auth-server"
 import { NextResponse } from "next/server"
 
-export async function POST(req: Request, { params }: { params: { roomId: string } }) {
+export const dynamic = "force-dynamic"
+
+export async function POST(req: Request, context: { params: { roomId: string } }) {
   try {
+    const params = await context.params
     const user = await getUserOrThrow()
     const { vote } = await req.json()
 

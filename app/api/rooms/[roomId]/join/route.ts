@@ -3,8 +3,9 @@ import { prisma } from "@/lib/prisma"
 import { getUserOrThrow } from "@/lib/server/auth/auth-server"
 import { NextResponse } from "next/server"
 
-export async function POST(_: Request, { params }: { params: { roomId: string } }) {
+export async function POST(_: Request, context: { params: { roomId: string } }) {
   try {
+    const params = await context.params
     const user = await getUserOrThrow()
 
     const existing = await prisma.participant.findFirst({

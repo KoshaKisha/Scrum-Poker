@@ -27,7 +27,7 @@ export default function DashboardPage() {
       loadRooms()
     }
   }, [authLoading, user])
-// console.log("🍪 Все cookies:", document.cookie)
+
   const loadRooms = async () => {
     try {
       const userRooms = await getUserRooms()
@@ -142,7 +142,7 @@ export default function DashboardPage() {
                       id: room.id,
                       name: room.name,
                       description: room.description ?? "",
-                      participantCount: room.participants.length,
+                      participantCount: room.participants?.length ?? 0,
                       createdAt: room.createdAt.toString(),
                       isActive: room.isActive,
                     }}
