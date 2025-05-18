@@ -95,3 +95,20 @@ export async function resetVotes(roomId: string) {
 
   return res.json()
 }
+
+export async function deleteRoom(roomId: string): Promise<void> {
+  const response = await fetch(`/api/rooms/${roomId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    if (response.status === 403) {
+      throw new Error("You don't have permission to delete this room")
+    }
+    throw new Error(error.message || "Failed to delete room")
+  }
+}

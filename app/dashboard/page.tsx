@@ -28,8 +28,23 @@ export default function DashboardPage() {
     }
   }, [authLoading, user])
 
+  // const loadRooms = async () => {
+  //   try {
+  //     const userRooms = await getUserRooms()
+  //     setRooms(userRooms)
+  //   } catch (error) {
+  //     toast({
+  //       title: "Error loading rooms",
+  //       description: "There was a problem loading your rooms.",
+  //       variant: "destructive",
+  //     })
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
   const loadRooms = async () => {
     try {
+      setIsLoading(true)
       const userRooms = await getUserRooms()
       setRooms(userRooms)
     } catch (error) {
@@ -41,6 +56,14 @@ export default function DashboardPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+  useEffect(() => {
+      loadRooms()
+    }, [])
+
+  const handleRoomDeleted = () => {
+    // Reload the rooms list after deletion
+    loadRooms()
   }
 
   const handleCreateRoom = async (e: React.FormEvent) => {
@@ -146,6 +169,7 @@ export default function DashboardPage() {
                       createdAt: room.createdAt.toString(),
                       isActive: room.isActive,
                     }}
+                    onDelete={handleRoomDeleted}
                   />
                 ))}
               </div>
