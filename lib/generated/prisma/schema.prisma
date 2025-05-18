@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  email         String        @unique
+  password_hash String
+  is_verified   Boolean       @default(false)
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @updatedAt
+  is_deleted    Boolean       @default(false)
+  name          String?
+  role          String        @default("user")
+  roomsCreated  Room[]        @relation("UserRooms")
+  participants  Participant[]
+  votes         Vote[]
+}
+
+model Room {
+  id           String        @id @default(cuid())
+  name         String
+  description  String?
+  votingSystem String
+  isActive     Boolean       @default(true)
+  isRevealed   Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  createdById  Int
+  createdBy    User          @relation("UserRooms", fields: [createdById], references: [id])
+  participants Participant[]
+  votes        Vote[]
+}
+
+model Participant {
+  id     String @id @default(cuid())
+  userId Int
+  roomId String
+  user   User   @relation(fields: [userId], references: [id])
+  room   Room   @relation(fields: [roomId], references: [id])
+}
+
+model Vote {
+  id     String @id @default(cuid())
+  userId Int
+  roomId String
+  value  String
+  user   User   @relation(fields: [userId], references: [id])
+  room   Room   @relation(fields: [roomId], references: [id])
+}
