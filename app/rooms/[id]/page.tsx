@@ -14,13 +14,17 @@ import { ParticipantsList } from "@/components/participants-list"
 import { VotingResults } from "@/components/voting-results"
 import { useAuth } from "@/hooks/use-auth"
 import { Eye, RefreshCw, Users } from "lucide-react"
+import type { Room, Participant, Vote, User } from "@/lib/generated/prisma"
 
 export default function RoomPage() {
   const { id } = useParams()
   const { user, isLoading: authLoading } = useAuth()
-  const [room, setRoom] = useState(null)
+  const [room, setRoom] = useState<(Room & {
+  participants: (Participant & { user: User })[]
+  votes: Vote[]
+}) | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedCard, setSelectedCard] = useState(null)
+  const [selectedCard, setSelectedCard] = useState<string | null>(null)
   const [isVoting, setIsVoting] = useState(false)
   const [isRevealed, setIsRevealed] = useState(false)
   const [participants, setParticipants] = useState([])
