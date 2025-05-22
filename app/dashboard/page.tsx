@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Plus, ArrowRight } from "lucide-react"
+import { Plus, ArrowRight, ShieldCheck } from "lucide-react"
 import { getUserRooms, createRoom } from "@/lib/rooms"
 import { RoomCard } from "@/components/room-card"
 import { toast } from "@/components/ui/use-toast"
@@ -28,20 +28,6 @@ export default function DashboardPage() {
     }
   }, [authLoading, user])
 
-  // const loadRooms = async () => {
-  //   try {
-  //     const userRooms = await getUserRooms()
-  //     setRooms(userRooms)
-  //   } catch (error) {
-  //     toast({
-  //       title: "Error loading rooms",
-  //       description: "There was a problem loading your rooms.",
-  //       variant: "destructive",
-  //     })
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
   const loadRooms = async () => {
     try {
       setIsLoading(true)
@@ -110,10 +96,22 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
-        <p className="text-muted-foreground">Manage your Scrum Poker sessions</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
+            <p className="text-muted-foreground">Manage your Scrum Poker sessions</p>
+          </div>
+          {user.role === "admin" && (
+            <Button asChild variant="outline" className="gap-2">
+              <Link href="/admin">
+                <ShieldCheck className="h-4 w-4" />
+                Admin Panel
+              </Link>
+            </Button>
+          )}
+        </div>
       </header>
 
       <div className="grid gap-6 md:grid-cols-2">
