@@ -15,19 +15,21 @@ datasource db {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  email         String   @unique
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
   password_hash String
-  is_verified   Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-  is_deleted    Boolean  @default(false)
+  is_verified   Boolean   @default(false)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  is_deleted    Boolean   @default(false)
   name          String?
-  role          String   @default("user")
-  roomsCreated  Room[]        @relation("UserRooms")
+  role          String    @default("user")
+  avatarUrl     String?
+  roomsCreated  Room[]    @relation("UserRooms")
   participants  Participant[]
   votes         Vote[]
 }
+
 
 model Room {
   id            String      @id @default(cuid())

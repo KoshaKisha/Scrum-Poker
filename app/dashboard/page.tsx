@@ -8,17 +8,29 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Plus, ArrowRight, ShieldCheck } from "lucide-react"
 import { getUserRooms, createRoom } from "@/lib/rooms"
 import { RoomCard } from "@/components/room-card"
 import { toast } from "@/components/ui/use-toast"
 import { useAuth } from "@/hooks/use-auth"
-import type { Room, Participant, User } from "@/lib/generated/prisma"
+import type { Room, Participant} from "@/lib/generated/prisma"
+import { useRouter } from "next/navigation"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Plus, ArrowRight, ShieldCheck, Settings, LogOut, User } from "lucide-react"
+import { logout } from "@/lib/auth"
 
 export default function DashboardPage() {
   const { user, isLoading: authLoading } = useAuth()
   const [rooms, setRooms] = useState<(Room & { participants: Participant[] })[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
   const [newRoomName, setNewRoomName] = useState("")
   const [isCreating, setIsCreating] = useState(false)
 
@@ -50,6 +62,19 @@ export default function DashboardPage() {
   const handleRoomDeleted = () => {
     // Reload the rooms list after deletion
     loadRooms()
+  }
+
+    const handleLogout = async () => {
+    try {
+      await logout()
+      router.push("/")
+    } catch (error) {
+      toast({
+        title: "Error logging out",
+        description: "There was a problem logging out.",
+        variant: "destructive",
+      })
+    }
   }
 
   const handleCreateRoom = async (e: React.FormEvent) => {
@@ -103,14 +128,58 @@ export default function DashboardPage() {
             <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
             <p className="text-muted-foreground">Manage your Scrum Poker sessions</p>
           </div>
-          {user.role === "admin" && (
-            <Button asChild variant="outline" className="gap-2">
-              <Link href="/admin">
-                <ShieldCheck className="h-4 w-4" />
-                Admin Panel
-              </Link>
-            </Button>
-          )}
+          <div className="flex items-center gap-4">
+            {user.role === "admin" && (
+              <Button asChild variant="outline" className="gap-2">
+                <Link href="/admin">
+                  <ShieldCheck className="h-4 w-4" />
+                  Admin Panel
+                </Link>
+              </Button>
+            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src="/placeholder.svg" alt={user.name} />
+                    <AvatarFallback>
+                      {user.name
+                        ?.split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase() || "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{user.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </header>
 

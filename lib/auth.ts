@@ -14,6 +14,16 @@ export async function login(data: { email: string; password: string }) {
   return res.json()
 }
 
+export async function logout(): Promise<void> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 500))
+
+  // Remove from localStorage
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("user")
+  }
+}
+
 export async function getCurrentUser() {
   try {
     const res = await fetch("/api/auth/me", {
