@@ -24,7 +24,6 @@ model User {
   is_deleted    Boolean   @default(false)
   name          String?
   role          String    @default("user")
-  avatarUrl     String?
   roomsCreated  Room[]    @relation("UserRooms")
   participants  Participant[]
   votes         Vote[]

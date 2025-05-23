@@ -1260,7 +1260,6 @@ export namespace Prisma {
     is_deleted: boolean | null
     name: string | null
     role: string | null
-    avatarUrl: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1273,7 +1272,6 @@ export namespace Prisma {
     is_deleted: boolean | null
     name: string | null
     role: string | null
-    avatarUrl: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1286,7 +1284,6 @@ export namespace Prisma {
     is_deleted: number
     name: number
     role: number
-    avatarUrl: number
     _all: number
   }
 
@@ -1309,7 +1306,6 @@ export namespace Prisma {
     is_deleted?: true
     name?: true
     role?: true
-    avatarUrl?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1322,7 +1318,6 @@ export namespace Prisma {
     is_deleted?: true
     name?: true
     role?: true
-    avatarUrl?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1335,7 +1330,6 @@ export namespace Prisma {
     is_deleted?: true
     name?: true
     role?: true
-    avatarUrl?: true
     _all?: true
   }
 
@@ -1435,7 +1429,6 @@ export namespace Prisma {
     is_deleted: boolean
     name: string | null
     role: string
-    avatarUrl: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1467,7 +1460,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: boolean
     role?: boolean
-    avatarUrl?: boolean
     roomsCreated?: boolean | User$roomsCreatedArgs<ExtArgs>
     participants?: boolean | User$participantsArgs<ExtArgs>
     votes?: boolean | User$votesArgs<ExtArgs>
@@ -1484,7 +1476,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: boolean
     role?: boolean
-    avatarUrl?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1497,7 +1488,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: boolean
     role?: boolean
-    avatarUrl?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1510,10 +1500,9 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: boolean
     role?: boolean
-    avatarUrl?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password_hash" | "is_verified" | "created_at" | "updated_at" | "is_deleted" | "name" | "role" | "avatarUrl", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password_hash" | "is_verified" | "created_at" | "updated_at" | "is_deleted" | "name" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     roomsCreated?: boolean | User$roomsCreatedArgs<ExtArgs>
     participants?: boolean | User$participantsArgs<ExtArgs>
@@ -1540,7 +1529,6 @@ export namespace Prisma {
       is_deleted: boolean
       name: string | null
       role: string
-      avatarUrl: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1976,7 +1964,6 @@ export namespace Prisma {
     readonly is_deleted: FieldRef<"User", 'Boolean'>
     readonly name: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
-    readonly avatarUrl: FieldRef<"User", 'String'>
   }
     
 
@@ -5828,8 +5815,7 @@ export namespace Prisma {
     updated_at: 'updated_at',
     is_deleted: 'is_deleted',
     name: 'name',
-    role: 'role',
-    avatarUrl: 'avatarUrl'
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5976,7 +5962,6 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"User"> | boolean
     name?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
-    avatarUrl?: StringNullableFilter<"User"> | string | null
     roomsCreated?: RoomListRelationFilter
     participants?: ParticipantListRelationFilter
     votes?: VoteListRelationFilter
@@ -5992,7 +5977,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     name?: SortOrderInput | SortOrder
     role?: SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
     roomsCreated?: RoomOrderByRelationAggregateInput
     participants?: ParticipantOrderByRelationAggregateInput
     votes?: VoteOrderByRelationAggregateInput
@@ -6011,7 +5995,6 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"User"> | boolean
     name?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
-    avatarUrl?: StringNullableFilter<"User"> | string | null
     roomsCreated?: RoomListRelationFilter
     participants?: ParticipantListRelationFilter
     votes?: VoteListRelationFilter
@@ -6027,7 +6010,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     name?: SortOrderInput | SortOrder
     role?: SortOrder
-    avatarUrl?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -6048,7 +6030,6 @@ export namespace Prisma {
     is_deleted?: BoolWithAggregatesFilter<"User"> | boolean
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: StringWithAggregatesFilter<"User"> | string
-    avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type RoomWhereInput = {
@@ -6243,7 +6224,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomCreateNestedManyWithoutCreatedByInput
     participants?: ParticipantCreateNestedManyWithoutUserInput
     votes?: VoteCreateNestedManyWithoutUserInput
@@ -6259,7 +6239,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomUncheckedCreateNestedManyWithoutCreatedByInput
     participants?: ParticipantUncheckedCreateNestedManyWithoutUserInput
     votes?: VoteUncheckedCreateNestedManyWithoutUserInput
@@ -6274,7 +6253,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUpdateManyWithoutCreatedByNestedInput
     participants?: ParticipantUpdateManyWithoutUserNestedInput
     votes?: VoteUpdateManyWithoutUserNestedInput
@@ -6290,7 +6268,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUncheckedUpdateManyWithoutCreatedByNestedInput
     participants?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
     votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
@@ -6306,7 +6283,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6318,7 +6294,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6331,7 +6306,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoomCreateInput = {
@@ -6607,7 +6581,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    avatarUrl?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -6624,7 +6597,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    avatarUrl?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6637,7 +6609,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     name?: SortOrder
     role?: SortOrder
-    avatarUrl?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -7443,7 +7414,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     participants?: ParticipantCreateNestedManyWithoutUserInput
     votes?: VoteCreateNestedManyWithoutUserInput
   }
@@ -7458,7 +7428,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     participants?: ParticipantUncheckedCreateNestedManyWithoutUserInput
     votes?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7530,7 +7499,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ParticipantUpdateManyWithoutUserNestedInput
     votes?: VoteUpdateManyWithoutUserNestedInput
   }
@@ -7545,7 +7513,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
     votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -7591,7 +7558,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomCreateNestedManyWithoutCreatedByInput
     votes?: VoteCreateNestedManyWithoutUserInput
   }
@@ -7606,7 +7572,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomUncheckedCreateNestedManyWithoutCreatedByInput
     votes?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7665,7 +7630,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUpdateManyWithoutCreatedByNestedInput
     votes?: VoteUpdateManyWithoutUserNestedInput
   }
@@ -7680,7 +7644,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUncheckedUpdateManyWithoutCreatedByNestedInput
     votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -7729,7 +7692,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomCreateNestedManyWithoutCreatedByInput
     participants?: ParticipantCreateNestedManyWithoutUserInput
   }
@@ -7744,7 +7706,6 @@ export namespace Prisma {
     is_deleted?: boolean
     name?: string | null
     role?: string
-    avatarUrl?: string | null
     roomsCreated?: RoomUncheckedCreateNestedManyWithoutCreatedByInput
     participants?: ParticipantUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7803,7 +7764,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUpdateManyWithoutCreatedByNestedInput
     participants?: ParticipantUpdateManyWithoutUserNestedInput
   }
@@ -7818,7 +7778,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     name?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     roomsCreated?: RoomUncheckedUpdateManyWithoutCreatedByNestedInput
     participants?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
   }
