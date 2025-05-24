@@ -75,3 +75,25 @@ export async function resetVotes(roomId: string) {
   })
 }
 
+export async function getParticipatedRooms() {
+  const user = await getUserOrThrow()
+
+  const rooms = await prisma.room.findMany({
+    where: {
+      participants: {
+        some: {
+          userId: user.id,
+        },
+      },
+      NOT: {
+        createdById: user.id,
+      },
+    },
+    include: {
+      participants: true,
+    },
+  })
+
+  return rooms
+}
+
