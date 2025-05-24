@@ -17,16 +17,16 @@ const sidebarItems = [
     href: "/admin/users",
     icon: Users,
   },
-  {
-    title: "Statistics",
-    href: "/admin/statistics",
-    icon: BarChart4,
-  },
-  {
-    title: "Settings",
-    href: "/admin/settings",
-    icon: Settings,
-  },
+//   {
+//     title: "Statistics",
+//     href: "/admin/statistics",
+//     icon: BarChart4,
+//   },
+//   {
+//     title: "Settings",
+//     href: "/admin/settings",
+//     icon: Settings,
+//   },
 ]
 
 export function AdminSidebar() {
