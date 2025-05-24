@@ -10,7 +10,10 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Scrum Poker",
   description: "A collaborative planning poker app for agile teams",
-    generator: 'Kosha'
+    generator: 'Kosha',
+  icons: {
+    icon: "/poker-cards.png",
+  },
 }
 
 export default function RootLayout({
@@ -24,9 +27,11 @@ export default function RootLayout({
         {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider> */}
-         <AuthProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+         <AuthProvider>
           {children}
         </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

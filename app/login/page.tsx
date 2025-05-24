@@ -2,23 +2,34 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import { login } from "@/lib/auth"
+import { useAuth } from "@/hooks/use-auth"
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectPath = searchParams.get("redirect") || "/dashboard"
+  const { user, refreshUser, isLoading: authLoading } = useAuth()
+
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(redirectPath)
+    }
+  }, [authLoading, user, router, redirectPath])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -31,7 +42,12 @@ export default function LoginPage() {
 
     try {
       await login(formData)
-      router.push("/dashboard")
+      await refreshUser()
+      toast({
+        title: "Login successful",
+        description: "Welcome back!",
+      })
+      router.push(redirectPath)
     } catch (error) {
       toast({
         title: "Login failed",
@@ -42,6 +58,14 @@ export default function LoginPage() {
       setIsLoading(false)
     }
   }
+
+  if (authLoading || user) {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <p>Loading...</p>
+    </div>
+  )
+}
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 dark:bg-gray-900 sm:px-6 lg:px-8">
@@ -97,3 +121,7 @@ export default function LoginPage() {
     </div>
   )
 }
+function refreshUser() {
+  throw new Error("Function not implemented.")
+}
+

@@ -15,13 +15,9 @@ export async function login(data: { email: string; password: string }) {
 }
 
 export async function logout(): Promise<void> {
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 500))
-
-  // Remove from localStorage
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("user")
-  }
+   await fetch("/api/auth/logout", {
+    method: "POST",
+  })
 }
 
 export async function getCurrentUser() {

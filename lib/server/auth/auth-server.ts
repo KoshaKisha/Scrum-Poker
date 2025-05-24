@@ -35,7 +35,7 @@ export async function loginOnServer(data: { email: string; password: string }) {
 
 export async function getUserOrThrow() {
   const token = (await cookies()).get("token")?.value
-  const payload = verifyJwt(token || "")
+  const payload = await verifyJwt(token || "")
   if (!payload || typeof payload !== "object" || !("id" in payload)) {
     throw new Error("Not authenticated")
   }

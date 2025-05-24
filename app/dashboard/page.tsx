@@ -100,7 +100,7 @@ export default function DashboardPage() {
       setIsCreating(false)
     }
   }
-  console.log("📦 Dashboard: user =", user, "authLoading =", authLoading)
+  // console.log("📦 Dashboard: user =", user, "authLoading =", authLoading)
   if (authLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">

@@ -6,7 +6,7 @@ import { getUserRoomsServer } from "@/lib/server/rooms/rooms-server"
 
 export async function POST(req: Request) {
   const token = (await cookies()).get("token")?.value
-  const payload = verifyJwt(token || "")
+  const payload = await verifyJwt(token || "")
   if (!payload || typeof payload !== "object" || !("id" in payload)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

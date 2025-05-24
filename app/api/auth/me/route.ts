@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { verifyJwt } from "@/lib/server/jwt"
 import { prisma } from "@/lib/prisma"
+import { getUserOrThrow } from "@/lib/server/auth/auth-server"
 
 // export async function GET() {
 //   const token = (await cookies()).get("token")?.value
@@ -29,7 +30,7 @@ export async function GET() {
     return NextResponse.json({ user: null }, { status: 401 })
   }
 
-  const payload = verifyJwt(token)
+  const payload = await verifyJwt(token)
   if (!payload || typeof payload !== "object" || !("id" in payload)) {
     return NextResponse.json({ user: null }, { status: 401 })
   }
@@ -42,3 +43,18 @@ export async function GET() {
   return NextResponse.json({ user })
 }
 
+
+// export async function GET() {
+//   try {
+//     const user = await getUserOrThrow()
+
+//     return NextResponse.json({
+//       id: user.id.toString(),
+//       name: user.name,
+//       email: user.email,
+//       role: user.role,
+//     })
+//   } catch (error) {
+//     return NextResponse.json({ error: "Not authenticated" }, { status: 401 })
+//   }
+// }
