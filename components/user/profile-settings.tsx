@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "@/components/ui/use-toast"
 import { useAuth } from "@/hooks/use-auth"
+import { useTheme } from "next-themes"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const profileFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -21,6 +23,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>
 
 export function ProfileSettings() {
   const { user } = useAuth()
+  const { theme, setTheme } = useTheme()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<ProfileFormValues>({
@@ -105,6 +108,21 @@ export function ProfileSettings() {
                   </FormItem>
                 )}
               />
+
+              <div className="space-y-2">
+                <FormLabel>Theme</FormLabel>
+                <Select value={theme} onValueChange={setTheme}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Saving..." : "Save Changes"}
               </Button>
