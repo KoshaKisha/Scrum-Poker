@@ -33,6 +33,7 @@ export default function DashboardPage() {
   const router = useRouter()
   const [newRoomName, setNewRoomName] = useState("")
   const [isCreating, setIsCreating] = useState(false)
+  const { refreshUser } = useAuth()
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -67,7 +68,8 @@ export default function DashboardPage() {
     const handleLogout = async () => {
     try {
       await logout()
-      router.push("/")
+      await refreshUser()
+      router.push("/login")
     } catch (error) {
       toast({
         title: "Error logging out",
@@ -249,3 +251,5 @@ export default function DashboardPage() {
     </div>
   )
 }
+
+
