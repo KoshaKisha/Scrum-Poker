@@ -4,24 +4,6 @@ import { verifyJwt } from "@/lib/server/jwt"
 import { prisma } from "@/lib/prisma"
 import { getUserOrThrow } from "@/lib/server/auth/auth-server"
 
-// export async function GET() {
-//   const token = (await cookies()).get("token")?.value
-
-//   if (!token) return NextResponse.json({ user: null }, { status: 401 })
-
-//   const payload = verifyJwt(token)
-//   if (!payload || typeof payload === "string") {
-//     return NextResponse.json({ user: null }, { status: 401 })
-//   }
-
-//   const user = await prisma.user.findUnique({
-//     where: { id: payload.id },
-//     select: { id: true, email: true, name: true },
-//   })
-
-//   return NextResponse.json({ user })
-// }
-
 export async function GET() {
   const cookieStore = cookies()
   const token = (await cookieStore).get("token")?.value
@@ -43,18 +25,3 @@ export async function GET() {
   return NextResponse.json({ user })
 }
 
-
-// export async function GET() {
-//   try {
-//     const user = await getUserOrThrow()
-
-//     return NextResponse.json({
-//       id: user.id.toString(),
-//       name: user.name,
-//       email: user.email,
-//       role: user.role,
-//     })
-//   } catch (error) {
-//     return NextResponse.json({ error: "Not authenticated" }, { status: 401 })
-//   }
-// }

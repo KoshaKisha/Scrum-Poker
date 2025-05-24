@@ -39,22 +39,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-  // const loadUser = async () => {
-  //   console.log("⏳ Загрузка пользователя в useEffect")
-    
-  //   await new Promise((res) => setTimeout(res, 500)) // 🔥 Подождать применение cookie
-
-  //   try {
-  //     const user = await getCurrentUser()
-  //     console.log("✅ Пользователь загружен:", user)
-  //     setUser(user)
-  //   } catch (e) {
-  //     console.error("❌ Ошибка при получении пользователя:", e)
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
-  // loadUser()
   refreshUser()
 }, [])
 
