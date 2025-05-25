@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma"
 import { getUserOrThrow } from "@/lib/server/auth/auth-server"
 import { revalidatePath } from "next/cache"
+import bcrypt from "bcrypt"
 
 export async function getUsers() {
   // Ensure the current user is an admin
@@ -89,7 +90,15 @@ export async function createUser(data: {
     throw new Error("Unauthorized")
   }
 
-  // Hash the password (you should use a proper password hashing function)
+  const existingUser = await prisma.user.findUnique({
+    where: { email: data.email },
+  })
+
+  if (existingUser) {
+    throw new Error("A user with this email already exists")
+  }
+
+  // Hash the password 
   const password_hash = await hashPassword(data.password)
 
   const user = await prisma.user.create({
@@ -106,8 +115,8 @@ export async function createUser(data: {
   return user
 }
 
-// This is a placeholder - use your actual password hashing function
-async function hashPassword(password: string): Promise<string> {
-  // In a real app, use bcrypt or similar
-  return password // Replace with actual hashing
+export async function hashPassword(password: string): Promise<string> {
+  const saltRounds = 10
+  const hashed = await bcrypt.hash(password, saltRounds)
+  return hashed
 }
