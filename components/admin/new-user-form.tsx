@@ -71,7 +71,7 @@ export function NewUserForm() {
                 <FormItem>
                   <FormLabel>Имя</FormLabel>
                   <FormControl>
-                    <Input placeholder="User's name" {...field} value={field.value || ""} />
+                    <Input placeholder="Имя пользователя..." {...field} value={field.value || ""} />
                   </FormControl>
                   <FormDescription>Отображаемое имя пользователя.</FormDescription>
                   <FormMessage />
