@@ -127,12 +127,12 @@ export default function DashboardPage() {
     <header className="mb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-center sm:text-left">
-          <h1 className="text-2xl sm:text-3xl font-bold">Добро пожаловать, {user.name}</h1>
-          <p className="text-muted-foreground">Управляйте своими сессиями</p>
+          <h1 className="text-xl sm:text-3xl font-bold">Добро пожаловать, {user.name}</h1>
+          <p className="text-sm text-muted-foreground">Управляйте своими сессиями</p>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {user.role === "admin" && (
-            <Button asChild variant="outline" className="gap-2 w-full sm:w-auto">
+            <Button asChild variant="outline" className="gap-2 w-full sm:w-auto text-sm">
               <Link href="/admin">
                 <ShieldCheck className="h-4 w-4" />
                 Панель администратора
@@ -179,78 +179,82 @@ export default function DashboardPage() {
     </header>
 
     <div className="grid gap-6 lg:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle>Создать новую комнату</CardTitle>
-          <CardDescription>Начните новую сессию</CardDescription>
-        </CardHeader>
-        <form onSubmit={handleCreateRoom}>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="room-name">Название комнаты</Label>
-                <Input
-                  id="room-name"
-                  placeholder="Введите название..."
-                  value={newRoomName}
-                  onChange={(e) => setNewRoomName(e.target.value)}
-                  required
-                />
+      <div className="w-full sm:w-full md:max-w-xl mx-auto lg:mx-0">
+        <Card className="p-2 sm:p-4">
+          <CardHeader>
+            <CardTitle className="text-lg sm:text-xl">Создать новую комнату</CardTitle>
+            <CardDescription className="text-sm">Начните новую сессию</CardDescription>
+          </CardHeader>
+          <form onSubmit={handleCreateRoom}>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <Label htmlFor="room-name" className="text-sm">Название комнаты</Label>
+                  <Input
+                    id="room-name"
+                    className="text-sm"
+                    placeholder="Введите название..."
+                    value={newRoomName}
+                    onChange={(e) => setNewRoomName(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
-            </div>
+            </CardContent>
+            <CardFooter>
+              <Button type="submit" disabled={isCreating} className="w-full sm:w-auto text-sm">
+                <Plus className="mr-2 h-4 w-4" />
+                {isCreating ? "Создаем..." : "Создать комнату"}
+              </Button>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
+
+      <div className="w-full sm:w-full md:max-w-xl mx-auto lg:mx-0">
+        <Card className="p-2 sm:p-4">
+          <CardHeader>
+            <CardTitle className="text-lg sm:text-xl">Ваши комнаты</CardTitle>
+            <CardDescription className="text-sm">Подключитесь или управляйте существующими комнатами</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {isLoading ? (
+              <p className="text-center text-muted-foreground text-sm">Загружаем ваши комнаты...</p>
+            ) : rooms.length === 0 ? (
+              <p className="text-center text-muted-foreground text-sm">У вас пока нет комнат.</p>
+            ) : (
+              <div className="space-y-4">
+                {rooms.map((room) => (
+                  <RoomCard
+                    key={room.id}
+                    room={{
+                      id: room.id,
+                      name: room.name,
+                      description: room.description ?? "",
+                      participantCount: room.participants?.length ?? 0,
+                      createdAt: room.createdAt.toString(),
+                      isActive: room.isActive,
+                    }}
+                    onDelete={handleRoomDeleted}
+                  />
+                ))}
+              </div>
+            )}
           </CardContent>
           <CardFooter>
-            <Button type="submit" disabled={isCreating} className="w-full sm:w-auto">
-              <Plus className="mr-2 h-4 w-4" />
-              {isCreating ? "Создаем..." : "Создать комнату"}
+            <Button variant="outline" className="w-full text-sm" asChild>
+              <Link href="/rooms">
+                Просмотреть все комнаты
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </CardFooter>
-        </form>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Ваши комнаты</CardTitle>
-          <CardDescription>
-            Подключитесь или управляйте существующими комнатами
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {isLoading ? (
-            <p className="text-center text-muted-foreground">Загружаем ваши комнаты...</p>
-          ) : rooms.length === 0 ? (
-            <p className="text-center text-muted-foreground">У вас пока нет комнат.</p>
-          ) : (
-            <div className="space-y-4">
-              {rooms.map((room) => (
-                <RoomCard
-                  key={room.id}
-                  room={{
-                    id: room.id,
-                    name: room.name,
-                    description: room.description ?? "",
-                    participantCount: room.participants?.length ?? 0,
-                    createdAt: room.createdAt.toString(),
-                    isActive: room.isActive,
-                  }}
-                  onDelete={handleRoomDeleted}
-                />
-              ))}
-            </div>
-          )}
-        </CardContent>
-        <CardFooter>
-          <Button variant="outline" className="w-full" asChild>
-            <Link href="/rooms">
-              Просмотреть все комнаты
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </CardFooter>
-      </Card>
+        </Card>
+      </div>
     </div>
   </div>
 )
+
 }
 
 
