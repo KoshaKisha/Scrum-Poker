@@ -123,133 +123,134 @@ export default function DashboardPage() {
   }
 
   return (
-        <div className="container mx-auto px-4 py-8">
-      <header className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Добро пожаловать, {user.name}</h1>
-            <p className="text-muted-foreground">Управляйте своими сессиями</p>
-          </div>
-          <div className="flex items-center gap-4">
-            {user.role === "admin" && (
-              <Button asChild variant="outline" className="gap-2">
-                <Link href="/admin">
-                  <ShieldCheck className="h-4 w-4" />
-                  Панель администратора
-                </Link>
-              </Button>
-            )}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar className="h-10 w-10">
-                    <AvatarFallback>
-                      {user.name
-                        ?.split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .toUpperCase() || "U"}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.name}</p>
-                    <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-
-                <DropdownMenuItem asChild>
-                  <Link href="/settings" className="cursor-pointer">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Настройки
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Выйти
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <header className="mb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold">Добро пожаловать, {user.name}</h1>
+          <p className="text-muted-foreground">Управляйте своими сессиями</p>
         </div>
-      </header>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Создать новую комнату</CardTitle>
-            <CardDescription>Начните новую сессию</CardDescription>
-          </CardHeader>
-          <form onSubmit={handleCreateRoom}>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="room-name">Название комнаты</Label>
-                  <Input
-                    id="room-name"
-                    placeholder="Введите название..."
-                    value={newRoomName}
-                    onChange={(e) => setNewRoomName(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button type="submit" disabled={isCreating}>
-                <Plus className="mr-2 h-4 w-4" />
-                {isCreating ? "Создаем..." : "Создать комнату"}
-              </Button>
-            </CardFooter>
-          </form>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Ваши комнаты</CardTitle>
-            <CardDescription>Подключитесь или управляйте существующими комнатами</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <p className="text-center text-muted-foreground">Загружаем ваши комнаты...</p>
-            ) : rooms.length === 0 ? (
-              <p className="text-center text-muted-foreground">У вас пока нет комнат.</p>
-            ) : (
-              <div className="space-y-4">
-                {rooms.map((room) => (
-                  <RoomCard
-                    key={room.id}
-                    room={{
-                      id: room.id,
-                      name: room.name,
-                      description: room.description ?? "",
-                      participantCount: room.participants?.length ?? 0,
-                      createdAt: room.createdAt.toString(),
-                      isActive: room.isActive,
-                    }}
-                    onDelete={handleRoomDeleted}
-                  />
-                ))}
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full" asChild>
-              <Link href="/rooms">
-                Просмотреть все комнаты
-                <ArrowRight className="ml-2 h-4 w-4" />
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {user.role === "admin" && (
+            <Button asChild variant="outline" className="gap-2 w-full sm:w-auto">
+              <Link href="/admin">
+                <ShieldCheck className="h-4 w-4" />
+                Панель администратора
               </Link>
             </Button>
-          </CardFooter>
-        </Card>
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                <Avatar className="h-10 w-10">
+                  <AvatarFallback>
+                    {user.name
+                      ?.split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .toUpperCase() || "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">{user.name}</p>
+                  <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/settings" className="cursor-pointer">
+                  <Settings className="mr-2 h-4 w-4" />
+                  Настройки
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                <LogOut className="mr-2 h-4 w-4" />
+                Выйти
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
+    </header>
+
+    <div className="grid gap-6 lg:grid-cols-2">
+      <Card>
+        <CardHeader>
+          <CardTitle>Создать новую комнату</CardTitle>
+          <CardDescription>Начните новую сессию</CardDescription>
+        </CardHeader>
+        <form onSubmit={handleCreateRoom}>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="room-name">Название комнаты</Label>
+                <Input
+                  id="room-name"
+                  placeholder="Введите название..."
+                  value={newRoomName}
+                  onChange={(e) => setNewRoomName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button type="submit" disabled={isCreating} className="w-full sm:w-auto">
+              <Plus className="mr-2 h-4 w-4" />
+              {isCreating ? "Создаем..." : "Создать комнату"}
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Ваши комнаты</CardTitle>
+          <CardDescription>
+            Подключитесь или управляйте существующими комнатами
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {isLoading ? (
+            <p className="text-center text-muted-foreground">Загружаем ваши комнаты...</p>
+          ) : rooms.length === 0 ? (
+            <p className="text-center text-muted-foreground">У вас пока нет комнат.</p>
+          ) : (
+            <div className="space-y-4">
+              {rooms.map((room) => (
+                <RoomCard
+                  key={room.id}
+                  room={{
+                    id: room.id,
+                    name: room.name,
+                    description: room.description ?? "",
+                    participantCount: room.participants?.length ?? 0,
+                    createdAt: room.createdAt.toString(),
+                    isActive: room.isActive,
+                  }}
+                  onDelete={handleRoomDeleted}
+                />
+              ))}
+            </div>
+          )}
+        </CardContent>
+        <CardFooter>
+          <Button variant="outline" className="w-full" asChild>
+            <Link href="/rooms">
+              Просмотреть все комнаты
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
-  )
+  </div>
+)
 }
 
 
