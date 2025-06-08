@@ -58,14 +58,14 @@ export function QRCodeShare({ roomId }: QRCodeShareProps) {
       <DialogTrigger asChild>
         <Button variant="outline">
           <QrCode className="mr-2 h-4 w-4" />
-          Полелиться
+          Поделиться
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Поделиться комнатой</DialogTitle>
           <DialogDescription>
-            Поделитесь этим кодом, чтобы другие усатники могли присоединиться
+            Поделитесь этим кодом, чтобы другие участники могли присоединиться
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center justify-center space-y-4 py-4">
