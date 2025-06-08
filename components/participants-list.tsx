@@ -54,7 +54,7 @@ export function ParticipantsList({ participants, votes, isRevealed }: Participan
                     <Badge variant="outline">{vote}</Badge>
                   ) : (
                     <Badge variant="secondary">
-                      <Check className="mr-1 h-3 w-3" /> Подтвержден
+                      <Check className="mr-1 h-3 w-3" /> Проголосовал
                     </Badge>
                   )
                 ) : (
