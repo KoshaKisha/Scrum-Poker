@@ -95,11 +95,11 @@ export function UserForm({ user }: UserFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
-                    <Input placeholder="User's name" {...field} value={field.value || ""} />
+                    <Input placeholder="Имя пользователя" {...field} value={field.value || ""} />
                   </FormControl>
-                  <FormDescription>The user's display name.</FormDescription>
+                  <FormDescription>Отображаемое имя пользователя.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -113,7 +113,7 @@ export function UserForm({ user }: UserFormProps) {
                   <FormControl>
                     <Input placeholder="user@example.com" {...field} />
                   </FormControl>
-                  <FormDescription>The user's email address.</FormDescription>
+                  <FormDescription>Электронная почта пользователя.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -123,19 +123,19 @@ export function UserForm({ user }: UserFormProps) {
               name="role"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Role</FormLabel>
+                  <FormLabel>Роль</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a role" />
+                        <SelectValue placeholder="Выберите роль" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="user">User</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
+                      <SelectItem value="user">Пользователь</SelectItem>
+                      <SelectItem value="admin">Администратор</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormDescription>The user's role in the system.</FormDescription>
+                  <FormDescription>Роль пользователя в системе.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -153,9 +153,9 @@ export function UserForm({ user }: UserFormProps) {
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel>Verified</FormLabel>
+                      <FormLabel>Подтвержден</FormLabel>
                       <FormDescription>
-                        Whether the user's email is verified.
+                       Подтвержден ли email пользователя
                       </FormDescription>
                     </div>
                   </FormItem>
@@ -173,9 +173,9 @@ export function UserForm({ user }: UserFormProps) {
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel>Deleted</FormLabel>
+                      <FormLabel>Удален</FormLabel>
                       <FormDescription>
-                        Whether the user is marked as deleted.
+                        Удален ли пользователь.
                       </FormDescription>
                     </div>
                   </FormItem>

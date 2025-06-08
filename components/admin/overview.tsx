@@ -31,7 +31,7 @@ export function Overview() {
   if (isLoading) {
     return (
       <div className="h-[300px] w-full animate-pulse bg-muted/20 rounded-md flex items-center justify-center">
-        Loading chart data...
+        Загрузка данных...
       </div>
     )
   }

@@ -15,9 +15,9 @@ import { toast } from "@/components/ui/use-toast"
 import { createUser } from "@/lib/admin/users"
 
 const newUserFormSchema = z.object({
-  name: z.string().min(1, {message: "Please enter a name"}),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+  name: z.string().min(1, {message: "Пожалуйста, введите имя"}),
+  email: z.string().email({ message: "Пожалуйста, введите корректный email" }),
+  password: z.string().min(8, { message: "Пароль должен содержать как минимум 8 символов" }),
   role: z.enum(["user", "admin"]),
   is_verified: z.boolean().default(false),
 })
@@ -69,11 +69,11 @@ export function NewUserForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Имя</FormLabel>
                   <FormControl>
                     <Input placeholder="User's name" {...field} value={field.value || ""} />
                   </FormControl>
-                  <FormDescription>The user's display name.</FormDescription>
+                  <FormDescription>Отображаемое имя пользователя.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -87,7 +87,7 @@ export function NewUserForm() {
                   <FormControl>
                     <Input placeholder="user@example.com" {...field} />
                   </FormControl>
-                  <FormDescription>The user's email address.</FormDescription>
+                  <FormDescription>Электронная почта пользователя.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -97,11 +97,11 @@ export function NewUserForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Пароль</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
                   </FormControl>
-                  <FormDescription>The user's initial password.</FormDescription>
+                  <FormDescription>Временный пароль пользователя.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -111,7 +111,7 @@ export function NewUserForm() {
               name="role"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Role</FormLabel>
+                  <FormLabel>Роль</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -119,11 +119,11 @@ export function NewUserForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="user">User</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
+                      <SelectItem value="user">Пользователь</SelectItem>
+                      <SelectItem value="admin">Администратор</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormDescription>The user's role in the system.</FormDescription>
+                  <FormDescription>Роль пользователя в системе.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -137,8 +137,8 @@ export function NewUserForm() {
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>Verified</FormLabel>
-                    <FormDescription>Mark the user as verified (skips email verification).</FormDescription>
+                    <FormLabel>Подтверждение email</FormLabel>
+                    <FormDescription>Помечает, что пользователь подтвержден (пропуск верификации email).</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -148,7 +148,7 @@ export function NewUserForm() {
                 Cancel
               </Button>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Creating..." : "Create User"}
+                {isSubmitting ? "Создаем..." : "Создать пользователя"}
               </Button>
             </div>
           </form>
