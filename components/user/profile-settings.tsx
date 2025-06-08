@@ -15,8 +15,8 @@ import { useTheme } from "next-themes"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const profileFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  name: z.string().min(2, { message: "Имя должно содержать как минимум 2 символа." }),
+  email: z.string().email({ message: "Введите корректный email." }),
 })
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>

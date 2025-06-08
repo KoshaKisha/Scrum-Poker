@@ -54,12 +54,12 @@ export function ParticipantsList({ participants, votes, isRevealed }: Participan
                     <Badge variant="outline">{vote}</Badge>
                   ) : (
                     <Badge variant="secondary">
-                      <Check className="mr-1 h-3 w-3" /> Voted
+                      <Check className="mr-1 h-3 w-3" /> Подтвержден
                     </Badge>
                   )
                 ) : (
                   <Badge variant="outline" className="text-muted-foreground">
-                    <HelpCircle className="mr-1 h-3 w-3" /> Waiting
+                    <HelpCircle className="mr-1 h-3 w-3" /> Ожидает
                   </Badge>
                 )}
               </li>
