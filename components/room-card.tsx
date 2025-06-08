@@ -103,8 +103,7 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive">
-                <Trash2 className="mr-2 h-4 w-4" />
-                Удалить
+                <Trash2 className=" h-4 w-2" />
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>

@@ -192,7 +192,7 @@ export default function DashboardPage() {
                   <Label htmlFor="room-name">Название комнаты</Label>
                   <Input
                     id="room-name"
-                    placeholder="Sprint Planning"
+                    placeholder="Введите название..."
                     value={newRoomName}
                     onChange={(e) => setNewRoomName(e.target.value)}
                     required

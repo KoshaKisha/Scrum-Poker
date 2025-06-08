@@ -82,7 +82,7 @@ export default function CreateRoomPage() {
                 <Input
                   id="name"
                   name="name"
-                  placeholder="Sprint Planning"
+                  placeholder="Введите название комнаты"
                   required
                   value={formData.name}
                   onChange={handleChange}
