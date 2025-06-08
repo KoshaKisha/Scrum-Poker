@@ -25,7 +25,7 @@ export default async function UserPage({ params }: UserPageProps) {
   
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold tracking-tight">Edit User</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Редактировать пользователя</h1>
       <UserForm user={user} />
     </div>
   )

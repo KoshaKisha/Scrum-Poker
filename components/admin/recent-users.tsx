@@ -106,7 +106,7 @@ const refreshUsers = async () => {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">Recent Users</h3>
+          <h3 className="text-sm font-medium">Недавние пользователи</h3>
           <Button variant="ghost" size="sm" disabled>
             <RefreshCw className="h-4 w-4" />
           </Button>
@@ -127,7 +127,7 @@ const refreshUsers = async () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium">Recent Users</h3>
+        <h3 className="text-sm font-medium">Недавние пользователи</h3>
         <Button
           variant="ghost"
           size="sm"
@@ -143,10 +143,10 @@ const refreshUsers = async () => {
       {users.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-md border border-dashed p-8 text-center">
           <Users className="h-10 w-10 text-muted-foreground" />
-          <h3 className="mt-4 text-lg font-semibold">No users yet</h3>
-          <p className="mt-2 text-sm text-muted-foreground">When users register, they will appear here.</p>
+          <h3 className="mt-4 text-lg font-semibold">Пользователей пока нет</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Когда пользователи зарегистрируются, они появятся здесь.</p>
           <Button asChild className="mt-4" variant="outline">
-            <Link href="/admin/users/new">Add your first user</Link>
+            <Link href="/admin/users/new">Создайте первого пользователя</Link>
           </Button>
         </div>
       ) : (
@@ -171,12 +171,12 @@ const refreshUsers = async () => {
                       <p className="text-sm font-medium">{user.name || "Unnamed User"}</p>
                       {user.role === "admin" && (
                         <Badge variant="default" className="ml-2">
-                          Admin
+                          Администратор
                         </Badge>
                       )}
                       {user.is_deleted && (
                         <Badge variant="destructive" className="ml-2">
-                          Deleted
+                          Удален
                         </Badge>
                       )}
                     </div>
@@ -194,15 +194,15 @@ const refreshUsers = async () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuLabel>Действия</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => router.push(`/admin/users/${user.id}`)}>
                       <Edit className="mr-2 h-4 w-4" />
-                      Edit
+                      Редактировать
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => router.push(`/admin/users/${user.id}`)}>
                       <Eye className="mr-2 h-4 w-4" />
-                      View Details
+                      Детали...
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
@@ -210,7 +210,7 @@ const refreshUsers = async () => {
                       onClick={() => handleDeleteUser(user.id)}
                     >
                       <Trash className="mr-2 h-4 w-4" />
-                      Delete
+                      Удалить
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -219,7 +219,7 @@ const refreshUsers = async () => {
           </div>
 
           <Button asChild variant="outline" className="w-full">
-            <Link href="/admin/users">View all users</Link>
+            <Link href="/admin/users">Все пользователи</Link>
           </Button>
         </>
       )}

@@ -31,9 +31,9 @@ export default function ParticipatedRoomsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Rooms You've Participated In</h1>
+      <h1 className="text-2xl font-bold mb-4">Комнаты, в которых Вы участвуете</h1>
       {rooms.length === 0 ? (
-        <p className="text-muted-foreground">You haven't participated in any rooms yet.</p>
+        <p className="text-muted-foreground">Вы пока нигде не участвуете.</p>
       ) : (
         <div className="space-y-4">
           {rooms.map((room) => (

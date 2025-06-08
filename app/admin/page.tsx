@@ -12,16 +12,16 @@ export const metadata: Metadata = {
 export default async function AdminDashboardPage() {
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Панель управления администратора</h1>
       
       <DashboardStats />
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
-            <CardTitle>Overview</CardTitle>
+            <CardTitle>Обзор</CardTitle>
             <CardDescription>
-              User registration overview for the past 30 days
+              Новые пользователи за последние 30 дней
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -30,10 +30,7 @@ export default async function AdminDashboardPage() {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>Recent Users</CardTitle>
-            <CardDescription>
-              Recently registered users
-            </CardDescription>
+            <CardTitle>Недавние пользователи</CardTitle>
           </CardHeader>
           <CardContent>
             <RecentUsers />

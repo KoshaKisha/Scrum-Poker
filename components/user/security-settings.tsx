@@ -66,8 +66,8 @@ export function SecuritySettings() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Change Password</CardTitle>
-          <CardDescription>Update your password to keep your account secure.</CardDescription>
+          <CardTitle>Изменить пароль</CardTitle>
+          <CardDescription>Обновите свой пароль.</CardDescription>
         </CardHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -77,13 +77,13 @@ export function SecuritySettings() {
                 name="currentPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Current Password</FormLabel>
+                    <FormLabel>Текущий пароль</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           {...field}
                           type={showCurrentPassword ? "text" : "password"}
-                          placeholder="Enter your current password"
+                          placeholder="Введите текущий пароль"
                         />
                         <Button
                           type="button"
@@ -105,13 +105,13 @@ export function SecuritySettings() {
                 name="newPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>New Password</FormLabel>
+                    <FormLabel>Новый пароль</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           {...field}
                           type={showNewPassword ? "text" : "password"}
-                          placeholder="Enter your new password"
+                          placeholder="Введите новый пароль"
                         />
                         <Button
                           type="button"
@@ -124,7 +124,7 @@ export function SecuritySettings() {
                         </Button>
                       </div>
                     </FormControl>
-                    <FormDescription>Password must be at least 8 characters long.</FormDescription>
+                    <FormDescription>Пароль должен содержать как минимум 8 символов.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -134,13 +134,13 @@ export function SecuritySettings() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm New Password</FormLabel>
+                    <FormLabel>Подтвердите новый пароль</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           {...field}
                           type={showConfirmPassword ? "text" : "password"}
-                          placeholder="Confirm your new password"
+                          placeholder="Введите пароль еще раз"
                         />
                         <Button
                           type="button"
@@ -160,7 +160,7 @@ export function SecuritySettings() {
             </CardContent>
             <CardFooter>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Updating..." : "Update Password"}
+                {isSubmitting ? "Обновляем..." : "Обновить"}
               </Button>
             </CardFooter>
           </form>

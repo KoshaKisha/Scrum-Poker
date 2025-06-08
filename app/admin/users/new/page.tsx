@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function NewUserPage() {
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold tracking-tight">Add New User</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Добавить нового пользователя</h1>
       <NewUserForm />
     </div>
   )

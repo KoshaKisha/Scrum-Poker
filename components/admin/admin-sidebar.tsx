@@ -8,12 +8,12 @@ import { LayoutDashboard, Users, Settings, LogOut, BarChart4 } from 'lucide-reac
 
 const sidebarItems = [
   {
-    title: "Dashboard",
+    title: "Панель управления",
     href: "/admin",
     icon: LayoutDashboard,
   },
   {
-    title: "Users",
+    title: "Пользователи",
     href: "/admin/users",
     icon: Users,
   },
@@ -37,7 +37,7 @@ export function AdminSidebar() {
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/admin" className="flex items-center gap-2 font-semibold">
           <LayoutDashboard className="h-5 w-5" />
-          <span>Admin Panel</span>
+          <span>Панель</span>
         </Link>
       </div>
       <div className="flex-1 overflow-auto py-2">
@@ -61,7 +61,7 @@ export function AdminSidebar() {
         <Button variant="outline" className="w-full justify-start" asChild>
           <Link href="/dashboard">
             <LogOut className="mr-2 h-4 w-4" />
-            Back to App
+            Назад к приложению
           </Link>
         </Button>
       </div>

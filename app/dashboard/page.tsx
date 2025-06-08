@@ -106,7 +106,7 @@ export default function DashboardPage() {
   if (authLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
+        <p>Загрузка...</p>
       </div>
     )
   }
@@ -114,9 +114,9 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">You need to be logged in</h1>
+        <h1 className="text-2xl font-bold">Вы должны быть авторизованы :)</h1>
         <Button asChild>
-          <Link href="/login">Go to Login</Link>
+          <Link href="/login">На страницу авторизации</Link>
         </Button>
       </div>
     )
@@ -127,15 +127,15 @@ export default function DashboardPage() {
       <header className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Welcome, {user.name}</h1>
-            <p className="text-muted-foreground">Manage your Scrum Poker sessions</p>
+            <h1 className="text-3xl font-bold">Добро пожаловать, {user.name}</h1>
+            <p className="text-muted-foreground">Управляйте своими сессиями</p>
           </div>
           <div className="flex items-center gap-4">
             {user.role === "admin" && (
               <Button asChild variant="outline" className="gap-2">
                 <Link href="/admin">
                   <ShieldCheck className="h-4 w-4" />
-                  Admin Panel
+                  Панель администратора
                 </Link>
               </Button>
             )}
@@ -165,13 +165,13 @@ export default function DashboardPage() {
                 <DropdownMenuItem asChild>
                   <Link href="/settings" className="cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
-                    Settings
+                    Настройки
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" />
-                  Log out
+                  Выйти
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -182,14 +182,14 @@ export default function DashboardPage() {
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Create New Room</CardTitle>
-            <CardDescription>Start a new planning poker session</CardDescription>
+            <CardTitle>Создать новую комнату</CardTitle>
+            <CardDescription>Начните новую сессию</CardDescription>
           </CardHeader>
           <form onSubmit={handleCreateRoom}>
             <CardContent>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="room-name">Room Name</Label>
+                  <Label htmlFor="room-name">Название комнаты</Label>
                   <Input
                     id="room-name"
                     placeholder="Sprint Planning"
@@ -203,7 +203,7 @@ export default function DashboardPage() {
             <CardFooter>
               <Button type="submit" disabled={isCreating}>
                 <Plus className="mr-2 h-4 w-4" />
-                {isCreating ? "Creating..." : "Create Room"}
+                {isCreating ? "Создаем..." : "Создать комнату"}
               </Button>
             </CardFooter>
           </form>
@@ -211,14 +211,14 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Your Rooms</CardTitle>
-            <CardDescription>Join or manage your existing rooms</CardDescription>
+            <CardTitle>Ваши комнтаты</CardTitle>
+            <CardDescription>Подключитесь или управляйте существующими комнатами</CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <p className="text-center text-muted-foreground">Loading your rooms...</p>
+              <p className="text-center text-muted-foreground">Загружаем ваши комнтаты...</p>
             ) : rooms.length === 0 ? (
-              <p className="text-center text-muted-foreground">You haven't created any rooms yet.</p>
+              <p className="text-center text-muted-foreground">У вас пока нет комнат.</p>
             ) : (
               <div className="space-y-4">
                 {rooms.map((room) => (
@@ -241,7 +241,7 @@ export default function DashboardPage() {
           <CardFooter>
             <Button variant="outline" className="w-full" asChild>
               <Link href="/rooms">
-                View All Rooms
+                Просмотреть все комнаты
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

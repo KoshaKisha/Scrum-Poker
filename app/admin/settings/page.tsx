@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 export default function SettingsPage() {
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-      <p className="text-muted-foreground">Manage system settings and configuration.</p>
+      <h1 className="text-3xl font-bold tracking-tight">Настройки</h1>
+      <p className="text-muted-foreground">Управление аккаунтом.</p>
 
       <Tabs defaultValue="general" className="w-full">
         <TabsList className="grid w-full max-w-md grid-cols-3">
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-          <TabsTrigger value="appearance">Appearance</TabsTrigger>
+          <TabsTrigger value="general">Основные</TabsTrigger>
+          <TabsTrigger value="security">Безопасность</TabsTrigger>
+          <TabsTrigger value="appearance">Внешний вид</TabsTrigger>
         </TabsList>
         <TabsContent value="general" className="mt-6">
           <GeneralSettings />

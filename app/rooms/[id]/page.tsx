@@ -141,9 +141,9 @@ export default function RoomPage() {
   if (!user) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">You need to be logged in to join this room</h1>
+        <h1 className="text-2xl font-bold">Вы должны быть авторизованы для входа в комнату</h1>
         <Button asChild>
-          <Link href={`/login?redirect=/rooms/${id}`}>Go to Login</Link>
+          <Link href={`/login?redirect=/rooms/${id}`}>Вернуться на страницу авторизации</Link>
         </Button>
       </div>
     )
@@ -152,10 +152,10 @@ export default function RoomPage() {
   if (!room) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Room not found</h1>
-        <p>The room you're looking for doesn't exist or you don't have access to it.</p>
+        <h1 className="text-2xl font-bold">Комната не найдена</h1>
+        <p>Комната, которую вы ищете, не создана или у вас нет доступа к ней.</p>
         <Button asChild>
-          <Link href="/dashboard">Back to Dashboard</Link>
+          <Link href="/dashboard">Вернуться на панель управления</Link>
         </Button>
       </div>
     )
@@ -168,7 +168,7 @@ export default function RoomPage() {
           <div className="flex items-center gap-2 mb-2">
             <Button variant="ghost" size="sm" onClick={() => window.history.back()} className="flex items-center gap-1">
               <ArrowLeft className="h-4 w-4" />
-              Back
+              Назад
             </Button>
           </div>
           <h1 className="text-3xl font-bold">{room.name}</h1>
@@ -180,8 +180,8 @@ export default function RoomPage() {
       <div className="grid gap-6 md:grid-cols-3">
         <Card className="md:col-span-2">
           <CardHeader>
-            <CardTitle>Voting</CardTitle>
-            <CardDescription>Select a card to cast your vote</CardDescription>
+            <CardTitle>Голосование</CardTitle>
+            <CardDescription>Выберите карточку для оценки</CardDescription>
           </CardHeader>
           <CardContent>
             <VotingCards
@@ -194,11 +194,11 @@ export default function RoomPage() {
           <CardFooter className="flex justify-between">
             <Button onClick={handleReveal} disabled={isRevealed}>
               <Eye className="mr-2 h-4 w-4" />
-              Reveal Votes
+              Показать оценки
             </Button>
             <Button onClick={handleReset} variant="outline">
               <RefreshCw className="mr-2 h-4 w-4" />
-              Reset
+              Начать новое голосование
             </Button>
           </CardFooter>
         </Card>
@@ -206,10 +206,10 @@ export default function RoomPage() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Participants</CardTitle>
+              <CardTitle>Участники</CardTitle>
               <CardDescription>
                 <Users className="mr-2 inline-block h-4 w-4" />
-                {participants.length} joined
+                {participants.length} участвует
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -220,11 +220,35 @@ export default function RoomPage() {
           {isRevealed && (
             <Card>
               <CardHeader>
-                <CardTitle>Results</CardTitle>
-                <CardDescription>Voting summary</CardDescription>
+                <CardTitle>Результаты</CardTitle>
+                <CardDescription>Итоги голосования</CardDescription>
               </CardHeader>
               <CardContent>
                 <VotingResults votes={votes} />
+
+                 {/* Среднее значение */}
+                <div className="mt-4 text-sm text-muted-foreground">
+                  Средняя оценка (округлено по Фибоначчи):{" "}
+                  <span className="font-semibold">
+                    {(() => {
+                      const numericVotes = Object.values(votes)
+                        .map(v => parseFloat(v))
+                        .filter(v => !isNaN(v))
+
+                      if (numericVotes.length === 0) return "—"
+
+                      const avg = numericVotes.reduce((a, b) => a + b, 0) / numericVotes.length
+
+                      const fib = [0, 1]
+                      while (fib[fib.length - 1] < avg) {
+                        fib.push(fib[fib.length - 1] + fib[fib.length - 2])
+                      }
+
+                      const rounded = fib[fib.length - 2]
+                      return rounded
+                    })()}
+                  </span>
+                </div>
               </CardContent>
             </Card>
           )}

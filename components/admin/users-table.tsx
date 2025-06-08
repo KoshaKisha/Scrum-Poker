@@ -166,7 +166,7 @@ export function UsersTable() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search users..."
+              placeholder="Найти..."
               className="pl-8"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -177,9 +177,9 @@ export function UsersTable() {
               <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Roles</SelectItem>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="user">User</SelectItem>
+              <SelectItem value="all">Все роли</SelectItem>
+              <SelectItem value="admin">Администратор</SelectItem>
+              <SelectItem value="user">Пользователь</SelectItem>
             </SelectContent>
           </Select>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -187,11 +187,11 @@ export function UsersTable() {
               <SelectValue placeholder="Filter by status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="deleted">Deleted</SelectItem>
-              <SelectItem value="verified">Verified</SelectItem>
-              <SelectItem value="unverified">Unverified</SelectItem>
+              <SelectItem value="all">Все статусы</SelectItem>
+              <SelectItem value="active">Активен</SelectItem>
+              <SelectItem value="deleted">Удален</SelectItem>
+              <SelectItem value="verified">Подтвержден</SelectItem>
+              <SelectItem value="unverified">Неподтвержден</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -202,7 +202,7 @@ export function UsersTable() {
           <Button asChild>
             <Link href="/admin/users/new">
               <UserPlus className="mr-2 h-4 w-4" />
-              Add User
+              Добавить пользователя
             </Link>
           </Button>
         </div>
@@ -213,25 +213,25 @@ export function UsersTable() {
           <TableHeader>
             <TableRow>
               <TableHead>ID</TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead>Имя</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead className="w-[80px]">Actions</TableHead>
+              <TableHead>Роль</TableHead>
+              <TableHead>Статус</TableHead>
+              <TableHead>Создан</TableHead>
+              <TableHead className="w-[80px]">Действия</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={7} className="h-24 text-center">
-                  Loading users...
+                  Загружаем...
                 </TableCell>
               </TableRow>
             ) : filteredUsers.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} className="h-24 text-center">
-                  No users found.
+                  Пользователи не найдены.
                 </TableCell>
               </TableRow>
             ) : (
@@ -247,11 +247,11 @@ export function UsersTable() {
                   </TableCell>
                   <TableCell>
                     {user.is_deleted ? (
-                      <Badge variant="destructive">Deleted</Badge>
+                      <Badge variant="destructive">Удален</Badge>
                     ) : user.is_verified ? (
-                      <Badge variant="default">Verified</Badge>
+                      <Badge variant="default">Подтвержден</Badge>
                     ) : (
-                      <Badge variant="outline">Unverified</Badge>
+                      <Badge variant="outline">Не подтвержден</Badge>
                     )}
                   </TableCell>
                   <TableCell>{new Date(user.created_at).toLocaleDateString()}</TableCell>
@@ -263,16 +263,16 @@ export function UsersTable() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>Действия</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => router.push(`/admin/users/${user.id}`)}>
-                          Edit
+                          Редактировать
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           className="text-destructive focus:text-destructive"
                           onClick={() => setUserToDelete(user.id)}
                         >
-                          Delete
+                          Удалить
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -287,9 +287,9 @@ export function UsersTable() {
       <AlertDialog open={userToDelete !== null} onOpenChange={(open) => !open && setUserToDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure you want to delete this user?</AlertDialogTitle>
+            <AlertDialogTitle>Вы уверены, что хотите удалить этого пользователя?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action will mark the user as deleted in the system. All their data will be preserved but they will no longer be able to log in.
+              Это действие добавит пользователю статус "Удален". Он не сможет зайти в систему.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -299,7 +299,7 @@ export function UsersTable() {
               disabled={isDeleting}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {isDeleting ? "Deleting..." : "Delete"}
+              {isDeleting ? "Удаляем..." : "Удалить"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

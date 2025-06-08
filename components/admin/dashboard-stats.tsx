@@ -53,7 +53,7 @@ export function DashboardStats() {
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+          <CardTitle className="text-sm font-medium">Всего пользователей</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -62,7 +62,7 @@ export function DashboardStats() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Verified Users</CardTitle>
+          <CardTitle className="text-sm font-medium">Подтвержденные пользователи</CardTitle>
           <UserCheck className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -71,7 +71,7 @@ export function DashboardStats() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Deleted Users</CardTitle>
+          <CardTitle className="text-sm font-medium">Удаленные пользователи</CardTitle>
           <UserX className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -80,7 +80,7 @@ export function DashboardStats() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Admin Users</CardTitle>
+          <CardTitle className="text-sm font-medium">Администраторы</CardTitle>
           <UserCog className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>

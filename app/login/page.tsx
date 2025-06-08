@@ -249,8 +249,8 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 dark:bg-gray-900 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Login</CardTitle>
-          <CardDescription>Enter your credentials to access your account</CardDescription>
+          <CardTitle className="text-2xl font-bold">Вход</CardTitle>
+          <CardDescription>Введите данные для авторизации</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
@@ -278,7 +278,7 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Пароль</Label>
                 {/* <Link href="/forgot-password" className="text-sm text-blue-500 hover:text-blue-600">
                   Forgot password?
                 </Link> */}
@@ -297,12 +297,12 @@ export default function LoginPage() {
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Logging in..." : "Login"}
+              {isLoading ? "Входим..." : "Войти"}
             </Button>
             <div className="text-center text-sm">
-              Don&apos;t have an account?{" "}
+              Нет аккаунта?{" "}
               <Link href="/register" className="text-blue-500 hover:text-blue-600">
-                Register
+                Зарегистрироваться
               </Link>
             </div>
           </CardFooter>

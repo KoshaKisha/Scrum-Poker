@@ -71,22 +71,22 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
           <CardTitle className="text-lg">{room.name}</CardTitle>
           {room.isActive ? (
             <Badge variant="default" className="bg-green-500 hover:bg-green-600">
-              Active
+              Активна
             </Badge>
           ) : (
-            <Badge variant="outline">Inactive</Badge>
+            <Badge variant="outline">Неактивна</Badge>
           )}
         </div>
-        <CardDescription>{room.description || "No description"}</CardDescription>
+        <CardDescription>{room.description || "Без описания"}</CardDescription>
       </CardHeader>
       <CardContent className="pb-2">
         <div className="flex items-center text-sm text-muted-foreground">
           <Users className="mr-1 h-4 w-4" />
-          <span>{room.participantCount} participants</span>
+          <span>{room.participantCount} участников</span>
           {room.createdAt && (
             <>
               <span className="mx-2">•</span>
-              <span>Created {new Date(room.createdAt).toLocaleDateString()}</span>
+              <span>Создана {new Date(room.createdAt).toLocaleDateString()}</span>
             </>
           )}
         </div>
@@ -94,7 +94,7 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
       <CardFooter className="flex justify-between gap-2">
         <Button asChild className="w-full">
           <Link href={`/rooms/${room.id}`}>
-            Join Room
+            Присоединиться к комнате
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
@@ -104,25 +104,24 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
             <AlertDialogTrigger asChild>
               <Button variant="destructive">
                 <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+                Удалить
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure you want to delete this room?</AlertDialogTitle>
+                <AlertDialogTitle>Вы уверены, что хотите удалить эту комнату?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete the room and all associated data including
-                  votes and participants.
+                  Это действие нельзя отменить.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>Отменить</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={handleDelete}
                   disabled={isDeleting}
                   className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                 >
-                  {isDeleting ? "Deleting..." : "Delete"}
+                  {isDeleting ? "Удаляем..." : "Удалить"}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

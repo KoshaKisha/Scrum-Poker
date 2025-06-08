@@ -78,7 +78,7 @@ export function ProfileSettings() {
     return (
       <Card>
         <CardContent className="pt-6">
-          <p className="text-center text-muted-foreground">Please log in to view your profile settings.</p>
+          <p className="text-center text-muted-foreground">Пожалуйста, авторизуйтесь, чтобы управлять аккаунтом.</p>
         </CardContent>
       </Card>
     )
@@ -88,8 +88,8 @@ export function ProfileSettings() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Profile Information</CardTitle>
-          <CardDescription>Update your personal information.</CardDescription>
+          <CardTitle>Информация профиля</CardTitle>
+          <CardDescription>Обновите свои данные.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <Form {...form}>
@@ -99,32 +99,32 @@ export function ProfileSettings() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Полное имя</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your full name" {...field} />
+                      <Input placeholder="Введите свое полное имя" {...field} />
                     </FormControl>
-                    <FormDescription>This is your display name that others will see.</FormDescription>
+                    <FormDescription>Это имя будет видно всем.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
               <div className="space-y-2">
-                <FormLabel>Theme</FormLabel>
+                <FormLabel>Тема</FormLabel>
                 <Select value={theme} onValueChange={setTheme}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select theme" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="light">Светлая</SelectItem>
+                    <SelectItem value="dark">Темная</SelectItem>
+                    <SelectItem value="system">Системная</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Saving..." : "Save Changes"}
+                {isSubmitting ? "Сохраняем..." : "Сохранить"}
               </Button>
             </form>
           </Form>

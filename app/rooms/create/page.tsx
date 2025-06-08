@@ -57,7 +57,7 @@ export default function CreateRoomPage() {
   if (authLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
+        <p>Загрузка...</p>
       </div>
     )
   }
@@ -72,13 +72,13 @@ export default function CreateRoomPage() {
       <div className="mx-auto max-w-2xl">
         <Card>
           <CardHeader>
-            <CardTitle>Create a New Room</CardTitle>
-            <CardDescription>Set up your planning poker session</CardDescription>
+            <CardTitle>Создать новую комнату</CardTitle>
+            <CardDescription>Начните Вашу сессию покера</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Room Name</Label>
+                <Label htmlFor="name">Название комнаты</Label>
                 <Input
                   id="name"
                   name="name"
@@ -89,7 +89,7 @@ export default function CreateRoomPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="description">Description (Optional)</Label>
+                <Label htmlFor="description">Описание (необязательно)</Label>
                 <Input
                   id="description"
                   name="description"
@@ -99,7 +99,7 @@ export default function CreateRoomPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="votingSystem">Voting System</Label>
+                <Label htmlFor="votingSystem">Система оценки</Label>
                 <Select value={formData.votingSystem} onValueChange={handleSelectChange}>
                   <SelectTrigger id="votingSystem">
                     <SelectValue placeholder="Select a voting system" />
@@ -114,7 +114,7 @@ export default function CreateRoomPage() {
             </CardContent>
             <CardFooter>
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating..." : "Create Room"}
+                {isLoading ? "Создаем..." : "Создать комнату"}
               </Button>
             </CardFooter>
           </form>

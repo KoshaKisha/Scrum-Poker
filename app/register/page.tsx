@@ -18,9 +18,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 const registerFormSchema = z
   .object({
-    name: z.string().min(1, { message: "Please enter a name" }),
-    email: z.string().email({ message: "Please enter a valid email address" }),
-    password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+    name: z.string().min(1, { message: "Пожалуйста, введите имя" }),
+    email: z.string().email({ message: "Пожалуйста, введите корректный email" }),
+    password: z.string().min(8, { message: "Пароль должен содержать как минимум 8 символов" }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -71,8 +71,8 @@ export default function RegisterPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 dark:bg-gray-900 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
-          <CardDescription>Enter your information to create an account</CardDescription>
+          <CardTitle className="text-2xl font-bold">Создайте аккаунт</CardTitle>
+          <CardDescription>Введите информацию для создания аккаунта</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -82,9 +82,9 @@ export default function RegisterPage() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Имя</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input placeholder="Иван Иванов" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -108,7 +108,7 @@ export default function RegisterPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Пароль</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="********" {...field} />
                     </FormControl>
@@ -121,7 +121,7 @@ export default function RegisterPage() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>Подтвердите пароль</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="********" {...field} />
                     </FormControl>
@@ -129,16 +129,30 @@ export default function RegisterPage() {
                   </FormItem>
                 )}
               />
+
+                {/* Политика конфиденциальности */}
+              <p className="text-xs text-muted-foreground text-center px-2">
+                Нажимая «Зарегистрироваться», вы соглашаетесь с{" "}
+                <Link
+                  href="/privacy-policy"
+                  target="_blank"
+                  className="underline text-blue-500 hover:text-blue-600"
+                >
+                  политикой конфиденциальности
+                </Link>
+                .
+              </p>
+
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating account..." : "Register"}
+                {isLoading ? "Создаем аккаунт..." : "Зарегистрироваться"}
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="text-center text-sm">
-          Already have an account?{" "}
+          Уже есть аккаунт?{" "}
           <Link href="/login" className="ml-1 text-blue-500 hover:text-blue-600">
-            Login
+            Войти
           </Link>
         </CardFooter>
       </Card>

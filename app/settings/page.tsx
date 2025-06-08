@@ -17,8 +17,8 @@ export default function SettingsPage() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-          <p className="text-muted-foreground">Manage your account settings and preferences.</p>
+          <h1 className="text-3xl font-bold tracking-tight">Настройки</h1>
+          <p className="text-muted-foreground">Управление Вашим аккаунтом.</p>
         </div>
          <Button
             variant="ghost"
@@ -33,8 +33,8 @@ export default function SettingsPage() {
 
         <Tabs defaultValue="profile" className="w-full">
           <TabsList className="grid w-full max-w-md grid-cols-2">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="security">Security</TabsTrigger>
+            <TabsTrigger value="profile">Профиль</TabsTrigger>
+            <TabsTrigger value="security">Безопасность</TabsTrigger>
           </TabsList>
           <TabsContent value="profile" className="mt-6">
             <ProfileSettings />
