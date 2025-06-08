@@ -162,98 +162,107 @@ export default function RoomPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <Button variant="ghost" size="sm" onClick={() => window.history.back()} className="flex items-center gap-1">
-              <ArrowLeft className="h-4 w-4" />
-              Назад
-            </Button>
-          </div>
-          <h1 className="text-3xl font-bold">{room.name}</h1>
-          {room.description && <p className="text-muted-foreground">{room.description}</p>}
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="text-center sm:text-left">
+        <div className="flex justify-center sm:justify-start mb-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => window.history.back()}
+            className="flex items-center gap-1"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Назад
+          </Button>
         </div>
+        <h1 className="text-2xl sm:text-3xl font-bold">{room.name}</h1>
+        {room.description && (
+          <p className="text-muted-foreground mt-1">{room.description}</p>
+        )}
+      </div>
+      <div className="flex justify-center sm:justify-end">
         <QRCodeShare roomId={id as string} />
       </div>
+    </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card className="md:col-span-2">
+    <div className="grid gap-6 lg:grid-cols-3">
+      <Card className="lg:col-span-2 w-full">
+        <CardHeader>
+          <CardTitle>Голосование</CardTitle>
+          <CardDescription>Выберите карточку для оценки</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <VotingCards
+            votingSystem={room.votingSystem}
+            selectedCard={selectedCard}
+            onSelect={handleVote}
+            disabled={isVoting || isRevealed}
+          />
+        </CardContent>
+        <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-4">
+          <Button onClick={handleReveal} disabled={isRevealed} className="w-full sm:w-auto">
+            <Eye className="mr-2 h-4 w-4" />
+            Показать оценки
+          </Button>
+          <Button onClick={handleReset} variant="outline" className="w-full sm:w-auto">
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Начать новое голосование
+          </Button>
+        </CardFooter>
+      </Card>
+
+      <div className="space-y-6 w-full">
+        <Card>
           <CardHeader>
-            <CardTitle>Голосование</CardTitle>
-            <CardDescription>Выберите карточку для оценки</CardDescription>
+            <CardTitle>Участники</CardTitle>
+            <CardDescription>
+              <Users className="mr-2 inline-block h-4 w-4" />
+              {participants.length} участвует
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <VotingCards
-              votingSystem={room.votingSystem}
-              selectedCard={selectedCard}
-              onSelect={handleVote}
-              disabled={isVoting || isRevealed}
+            <ParticipantsList
+              participants={participants}
+              votes={votes}
+              isRevealed={isRevealed}
             />
           </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button onClick={handleReveal} disabled={isRevealed}>
-              <Eye className="mr-2 h-4 w-4" />
-              Показать оценки
-            </Button>
-            <Button onClick={handleReset} variant="outline">
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Начать новое голосование
-            </Button>
-          </CardFooter>
         </Card>
 
-        <div className="space-y-6">
+        {isRevealed && (
           <Card>
             <CardHeader>
-              <CardTitle>Участники</CardTitle>
-              <CardDescription>
-                <Users className="mr-2 inline-block h-4 w-4" />
-                {participants.length} участвует
-              </CardDescription>
+              <CardTitle>Результаты</CardTitle>
+              <CardDescription>Итоги голосования</CardDescription>
             </CardHeader>
             <CardContent>
-              <ParticipantsList participants={participants} votes={votes} isRevealed={isRevealed} />
+              <VotingResults votes={votes} />
+
+              <div className="mt-4 text-sm text-muted-foreground">
+                Средняя оценка (округлено по Фибоначчи):{" "}
+                <span className="font-semibold">
+                  {(() => {
+                    const numericVotes = Object.values(votes)
+                      .map((v) => parseFloat(v))
+                      .filter((v) => !isNaN(v))
+                    if (numericVotes.length === 0) return "—"
+                    const avg =
+                      numericVotes.reduce((a, b) => a + b, 0) / numericVotes.length
+                    const fib = [0, 1]
+                    while (fib[fib.length - 1] < avg) {
+                      fib.push(fib[fib.length - 1] + fib[fib.length - 2])
+                    }
+                    const rounded = fib[fib.length - 2]
+                    return rounded
+                  })()}
+                </span>
+              </div>
             </CardContent>
           </Card>
-
-          {isRevealed && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Результаты</CardTitle>
-                <CardDescription>Итоги голосования</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <VotingResults votes={votes} />
-
-                 {/* Среднее значение */}
-                <div className="mt-4 text-sm text-muted-foreground">
-                  Средняя оценка (округлено по Фибоначчи):{" "}
-                  <span className="font-semibold">
-                    {(() => {
-                      const numericVotes = Object.values(votes)
-                        .map(v => parseFloat(v))
-                        .filter(v => !isNaN(v))
-
-                      if (numericVotes.length === 0) return "—"
-
-                      const avg = numericVotes.reduce((a, b) => a + b, 0) / numericVotes.length
-
-                      const fib = [0, 1]
-                      while (fib[fib.length - 1] < avg) {
-                        fib.push(fib[fib.length - 1] + fib[fib.length - 2])
-                      }
-
-                      const rounded = fib[fib.length - 2]
-                      return rounded
-                    })()}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-        </div>
+        )}
       </div>
     </div>
-  )
+  </div>
+)
 }
