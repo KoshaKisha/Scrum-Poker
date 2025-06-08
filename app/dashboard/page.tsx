@@ -211,12 +211,12 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Ваши комнтаты</CardTitle>
+            <CardTitle>Ваши комнаты</CardTitle>
             <CardDescription>Подключитесь или управляйте существующими комнатами</CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <p className="text-center text-muted-foreground">Загружаем ваши комнтаты...</p>
+              <p className="text-center text-muted-foreground">Загружаем ваши комнаты...</p>
             ) : rooms.length === 0 ? (
               <p className="text-center text-muted-foreground">У вас пока нет комнат.</p>
             ) : (
