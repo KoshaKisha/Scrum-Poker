@@ -126,8 +126,20 @@ export default function DashboardPage() {
   <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <header className="mb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="text-center sm:text-left">
-          <h1 className="text-xl sm:text-3xl font-bold">Добро пожаловать, {user.name}</h1>
+       <div className="text-center sm:text-left">
+          <h1 className="text-xl sm:text-3xl font-bold flex items-center justify-center sm:justify-start gap-2">
+            Добро пожаловать,&nbsp;
+            {user.name?.trim() ? (
+              user.name
+            ) : (
+              <span className="inline-flex items-center gap-1">
+                Гость
+                <span className="text-red-500 cursor-help" title="Пожалуйста, заполните данные профиля">
+                  *
+                </span>
+              </span>
+            )}
+          </h1>
           <p className="text-sm text-muted-foreground">Управляйте своими сессиями</p>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

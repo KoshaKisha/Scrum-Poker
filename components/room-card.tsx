@@ -92,12 +92,14 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
         </div>
       </CardContent>
       <CardFooter className="flex justify-between gap-2">
-        <Button asChild className="w-full">
-          <Link href={`/rooms/${room.id}`}>
-            Присоединиться к комнате
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        <div className="mx-auto w-full sm:w-1/2">
+          <Button asChild className="w-full">
+            <Link href={`/rooms/${room.id}`}>
+              Присоединиться к комнате
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
 
         {showDeleteButton && (
           <AlertDialog>
