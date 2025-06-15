@@ -95,7 +95,7 @@ export function RoomCard({ room, onDelete, showDeleteButton = true }: RoomCardPr
         <div className="mx-auto w-full sm:w-1/2">
           <Button asChild className="w-full">
             <Link href={`/rooms/${room.id}`}>
-              Присоединиться к комнате
+              Присоединиться
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
